@@ -7,7 +7,8 @@ import {
   StyleSheet,
   TouchableOpacity,
 } from 'react-native';
-
+import Icon from 'react-native-vector-icons/FontAwesome';
+import {primaryColor} from '../common';
 export default class Home extends Component {
   constructor(props) {
     super(props);
@@ -18,13 +19,24 @@ export default class Home extends Component {
         <View style={styles.body}>
           <TouchableOpacity style={styles.btnItem}>
             <View style={styles.item}>
-              <Text>Campain 1</Text>
+              <View style={styles.info}>
+                <Text>Campain 1</Text>
+              </View>
+              <View style={styles.footer}>
+                <View style={styles.group}>
+                  <Icon name="users" size={14}/>
+                  <Text> 10</Text>
+                </View>
+              </View>
+              <View style={styles.lock}>
+                <Icon name="lock" size={30} color="#FF9500"/>
+              </View>
             </View>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.btnItem}>
-            <View style={styles.item}>
-              <Text>Campain 1</Text>
-            </View>
+        </View>
+        <View style={styles.btnCreateCampaign}>
+          <TouchableOpacity style={styles.wrapBtnCreate}>
+            <Icon name="plus" size={20} color='#fff'/>
           </TouchableOpacity>
         </View>
       </View>
@@ -33,6 +45,40 @@ export default class Home extends Component {
 }
 
 const styles = StyleSheet.create({
+  lock: {
+    position: 'absolute',
+    top:0,
+    left: 0,
+    bottom: 0,
+    right: 0,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'rgba(223,170,237,0.5)',
+    borderRadius: 3,
+  },
+  info: {
+    marginBottom: 15,
+  },
+  footer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+  group: {
+    flexDirection: 'row',
+  },
+  wrapBtnCreate: {
+    height: 50,
+    width: 50,
+    borderRadius: 25,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: primaryColor,
+  },
+  btnCreateCampaign: {
+    position: 'absolute',
+    bottom: 20,
+    right: 20,
+  },
   body: {
     marginTop: 64,
   },
