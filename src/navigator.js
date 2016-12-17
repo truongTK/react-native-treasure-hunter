@@ -11,6 +11,8 @@ import {
     Home,
     Login,
   } from './screens';
+import Step1 from './screens/campaign/step1';
+import Step2 from './screens/campaign/step2';
 
 export default class Navigator extends Component {
 
@@ -38,7 +40,17 @@ export default class Navigator extends Component {
           initialRoute={{
             component: Home,
             title: 'Home',
-            // navigationBarHidden: true,
+            rightButtonTitle: 'Create',
+            onRightButtonPress: () => this.rootNavigator.push({
+              component: Step1,
+              title: 'Create Campaign',
+              rightButtonTitle: 'Next',
+              onRightButtonPress: () => this.rootNavigator.push({
+                component: Step2,
+                title: 'Map',
+                rightButtonTitle: 'Next',
+              })
+            }),
           }}
         />
       </View>

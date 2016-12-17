@@ -1,106 +1,84 @@
-/* @flow */
-
 import React, { Component } from 'react';
 import {
-  View,
-  Text,
+  AppRegistry,
   StyleSheet,
+  Text,
+  View,
+  Image,
+  TabBarIOS,
   TouchableOpacity,
 } from 'react-native';
-import Icon from 'react-native-vector-icons/FontAwesome';
-import {primaryColor} from '../common';
-export default class Home extends Component {
-  constructor(props) {
-    super(props);
-  }
-  render() {
-    return (
-      <View style={styles.container}>
-        <View style={styles.body}>
-          <TouchableOpacity style={styles.btnItem}>
-            <View style={styles.item}>
-              <View style={styles.info}>
-                <Text>Campain 1</Text>
-              </View>
-              <View style={styles.footer}>
-                <View style={styles.group}>
-                  <Icon name="users" size={14}/>
-                  <Text> 10</Text>
-                </View>
-              </View>
-              <View style={styles.lock}>
-                <Icon name="lock" size={30} color="#FF9500"/>
-              </View>
-            </View>
-          </TouchableOpacity>
-        </View>
-        <View style={styles.btnCreateCampaign}>
-          <TouchableOpacity style={styles.wrapBtnCreate}>
-            <Icon name="plus" size={20} color='#fff'/>
-          </TouchableOpacity>
-        </View>
-      </View>
-    );
-  }
-}
+
+import Icon from 'react-native-vector-icons/Ionicons';
+
+import Tab1 from './tab-campaign';
+import Tab2 from './tab-manager-campaign';
 
 const styles = StyleSheet.create({
-  lock: {
-    position: 'absolute',
-    top:0,
-    left: 0,
-    bottom: 0,
-    right: 0,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: 'rgba(223,170,237,0.5)',
-    borderRadius: 3,
-  },
-  info: {
-    marginBottom: 15,
-  },
-  footer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-  },
-  group: {
-    flexDirection: 'row',
-  },
-  wrapBtnCreate: {
-    height: 50,
-    width: 50,
-    borderRadius: 25,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: primaryColor,
-  },
-  btnCreateCampaign: {
-    position: 'absolute',
-    bottom: 20,
-    right: 20,
-  },
-  body: {
-    marginTop: 64,
-  },
-  btnItem: {
-    marginBottom: 10,
-  },
-  item: {
-    padding: 15,
-    borderRadius: 3,
-    shadowColor: "#000000",
-    shadowOpacity: 0.4,
-    shadowRadius: 1,
-    shadowOffset: {
-      height: 2,
-      width: 1,
-    },
-    backgroundColor :'#fff',
+  navigator: {
+    flex: 1,
   },
   container: {
     flex: 1,
-    padding: 8,
-    backgroundColor: '#ccc',
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#F5FCFF',
+  },
+  tabContent: {
+    flex: 1,
+    alignItems: 'center',
     justifyContent: 'center',
   },
+  tabText: {
+    color: 'white',
+  },
+  button: {
+    marginTop: 20,
+    padding: 8,
+    backgroundColor: 'white',
+    borderRadius: 4,
+  },
 });
+
+export default class TabBarExample extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      selectedTab: 'home',
+    };
+  }
+
+  render() {
+    return (
+      <TabBarIOS
+        tintColor="black"
+        barTintColor="#fff">
+        <Icon.TabBarItemIOS
+          title="Home"
+          iconName="ios-home-outline"
+          selectedIconName="ios-home"
+          selected={this.state.selectedTab === 'home'}
+          onPress={() => {
+            this.setState({
+              selectedTab: 'home',
+            });
+          }}>
+          <Tab1 {...this.props}/>
+        </Icon.TabBarItemIOS>
+        <Icon.TabBarItemIOS
+          title="Campaign Manager"
+          iconName="ios-person-outline"
+          selectedIconName="ios-person"
+          selected={this.state.selectedTab === 'profile'}
+          onPress={() => {
+            this.setState({
+              selectedTab: 'profile',
+            });
+          }}>
+          <Tab2 {...this.props}/>
+        </Icon.TabBarItemIOS>
+      </TabBarIOS>
+    );
+  }
+}
